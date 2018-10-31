@@ -57,7 +57,7 @@ model.compile(loss=keras.losses.categorical_crossentropy, optimizer='sgd', metri
 
 # Training Hyperparameters
 batch_size = 3   # Mini batch sizes
-num_epoch = 5     # Number of epochs to train for
+num_epoch = 25     # Number of epochs to train for
 model_log = model.fit(X_train, y_train, batch_size=batch_size, epochs=num_epoch, verbose=1) #validation_data=(X_test, y_test)
 
 #score = model.evaluate(X_test, y_test, verbose=0)
