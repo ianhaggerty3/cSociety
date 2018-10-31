@@ -25,14 +25,9 @@ def load_images():
 
     return (X_test, y_test)
 
-'''
+
 if '__name__' == '__main__':
     (X_test, y_test) = load_images()
 
     print(X_test.shape)
     print(y_test.shape)
-'''
-(X_test, y_test) = load_images()
-
-print(X_test.shape)
-print(y_test.shape)
