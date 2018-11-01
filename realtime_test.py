@@ -1,8 +1,7 @@
 import keras
-from keras import backend as kbackend
+import numpy
 import cv2
 import time
-import numpy
 
 fid = open("model_digit.json", "r")
 json_string = fid.read()
