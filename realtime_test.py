@@ -39,12 +39,13 @@ def realtime_test(secsBetweenSamples: float):
             X_test = X_test.reshape(1, img_rows, img_cols, 1)
             prediction = model.predict(X_test)
             # display image
-            index = numpy.amax(prediction)
-            cv2.putText(img, categories[int(prediction[0])], (10, 10), font, 0.8, 255, 2, cv2.LINE_AA)
-            cv2.imshow('current image', img)
+            index = numpy.argmax(prediction)
+            cv2.putText(frame, categories[index], (30, 30), font, 0.8, (255, 255, 255), 2, cv2.LINE_AA)
+            cv2.imshow('current image', frame)
             cv2.waitKey(1)
             time.sleep(secsBetweenSamples)
     except KeyboardInterrupt:
+        # Note: Pycharm KeyboardInterrupt is ctrl + f2, normally it is ctrl + c
         print('')
     cap.release()
 
