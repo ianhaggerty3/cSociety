@@ -1,38 +1,32 @@
 import cv2
 import time
-import platform
-
-IS_MAC = (platform.system() == 'Darwin')
 
 def get_images(numSamples: int, secsBetweenSamples: float):
-
-    # On my laptop
+    '''Gets a set number of images in the specified folders'''
     # 0 front camera
     # 1 back camera
     camera = 0
     cap = cv2.VideoCapture(camera)
+    categories = {0: 'closed_fist', 1: 'one_finger', 2: 'open_hand', 3: 'thumbs_up', 4: 'two_fingers'}
+    name = input('Please input your name: ')
+    for key in categories:
+        _ = input(f'Press enter if you are ready to take image: {categories[key]}')
 
-    # Capture X number of images
-    for x in range(numSamples):
-        # take image
-        ret, frame = cap.read()
+        # Capture X number of images
+        for x in range(numSamples):
+            # take image
+            ret, frame = cap.read()
 
-        # display image
-        cv2.imshow('frame', frame)
+            # display image
+            cv2.imshow('frame', frame)
 
-        #   Mac default camera is 1280 by 720 (16:9)
-        if (IS_MAC):
-            frame = frame[:, 160:1120, :]   #   Extract the middle column of the image (go from 16:9 resolution to 4:3 resolution)
+            #   Ensure common resolution
+            frame = cv2.resize(frame, (640, 480))
 
-        #   Ensure common resolution
-        frame = cv2.resize(frame, (640, 480))
-
-        # write image to file
-        if (not IS_MAC or x):   #   The first image doesn't save on mac
-            out = cv2.imwrite('./two_fingers/capture{}.jpg'.format(x), frame)
-        cv2.waitKey(1)
-
-        time.sleep(secsBetweenSamples)
+            # write image to file
+            out = cv2.imwrite(f'./images/{categories[key]}/{name}_{categories[key]}{x}.jpg', frame)
+            cv2.waitKey(1)
+            time.sleep(secsBetweenSamples)
 
     cap.release()
 
