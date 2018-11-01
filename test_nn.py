@@ -28,7 +28,7 @@ y_test = keras.utils.to_categorical(y_test, num_category)
 batch_size = 3   # Mini batch sizes
 num_epoch = 10     # Number of epochs to train for
 
-#model.compile(loss=keras.losses.categorical_crossentropy, optimizer='sgd', metrics=['accuracy'])
+model.compile(loss=keras.losses.categorical_crossentropy, optimizer='sgd', metrics=['accuracy'])
 
 score = model.evaluate(X_test, y_test, verbose=1)
 print('Test loss:', score[0])
