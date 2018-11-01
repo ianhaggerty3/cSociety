@@ -58,9 +58,12 @@ model.compile(loss=keras.losses.categorical_crossentropy, optimizer='sgd', metri
 # Training Hyperparameters
 batch_size = 3   # Mini batch sizes
 num_epoch = 25     # Number of epochs to train for
-model_log = model.fit(X_train, y_train, validation_data=(X_test, y_test), batch_size=batch_size, epochs=num_epoch, verbose=1)
+try:
+    model_log = model.fit(X_train, y_train, validation_data=(X_test, y_test), batch_size=batch_size, epochs=num_epoch, verbose=1)
+except KeyboardInterrupt:
+    print("Interrupted learning process")
 
-score = model.evaluate(X_test, y_test, verbose=0)
+score = model.evaluate(X_test, y_test, batch_size=3, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
 
