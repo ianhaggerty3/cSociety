@@ -1,12 +1,8 @@
 import keras
-from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers import Dense, Flatten, Conv2D, MaxPooling2D
 from keras import backend as kbackend
 import data_loader
-
-# Loading data from the MNIST Database
-#(X_train, y_train), (X_test, y_test) = mnist.load_data()
 
 (X_train, y_train), (X_test, y_test) = data_loader.load_images()
 print("X_train shape", X_train.shape)
@@ -63,7 +59,7 @@ try:
 except KeyboardInterrupt:
     print("Interrupted learning process")
 
-score = model.evaluate(X_test, y_test, batch_size=3, verbose=0)
+score = model.evaluate(X_test, y_test, batch_size=batch_size, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
 
